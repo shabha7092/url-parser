@@ -1,0 +1,125 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.shabha.urlparser</groupId>
+  <artifactId>url-parser</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+		<pig.version>0.14.0.17.1605240208</pig.version>
+		<testng.version>6.8.13</testng.version>
+		<pigunit.version>0.14.0.17.1605240208</pigunit.version>
+		<hadoop.version>2.7.2.7.1604210306</hadoop.version>
+		<gson.version>2.2.4</gson.version>
+		<json.version>1.1</json.version>
+		<stanfordcorenlp.version>3.9.1</stanfordcorenlp.version>
+		<dictionary.version>1.0</dictionary.version>
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>nlp-repo</id>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>ignore</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>file://${basedir}/src/main/lib</url>
+		</repository>
+	</repositories>
+	
+	<dependencies>
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-minicluster</artifactId>
+			<version>${hadoop.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.pig</groupId>
+			<artifactId>pig</artifactId>
+			<version>0.17.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.pig</groupId>
+			<artifactId>piggybank</artifactId>
+			<version>0.17.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>javanlp-core</artifactId>
+			<version>${stanfordcorenlp.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp-models-current</artifactId>
+			<version>${stanfordcorenlp.version}</version>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass></mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+		
+</project>
